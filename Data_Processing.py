@@ -1,4 +1,7 @@
-    import os
+import os
+import glob
+import shutil
+import random
 
 def HyphenReplaceUnder(directory):
     """
@@ -98,3 +101,27 @@ def FileRename(directory):
             
             os.rename(FILE_OLD, FILE_NEW + '.wav')
             index += 1
+
+def moveRandomFiles(currentdirectory, newdirectory, randomfiles):
+    
+    """
+    Function to move a random selection of audio (.wav) files from one directory to another.
+    
+    currentdirectory is where the .wav file(s) are currently situated and must be defined in the form "C:\\...\\Folder name"
+    
+    newdirectory is where it is desired the .wav file(s) will be moved to. It can be defined in the same form as currentdirectory,
+    or as "C:/.../Folder name"
+    
+    randomfiles is an integer of the number of randomly selected files are desired to be moved
+    
+    """
+    
+    import glob
+    dirExtention = currentdirectory + "/*.wav"
+    fileList = glob.glob(dirExtention)
+    
+    randomNumbers = random.sample(xrange(len(fileList)), randomfiles)
+    fileSelection = [fileList[i] for i in randomNumbers]
+    
+    for i in fileSelection:
+        shutil.move(i, newdirectory)
