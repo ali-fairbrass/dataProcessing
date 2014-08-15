@@ -12,8 +12,8 @@ import scipy.io.wavfile
 import numpy as np
 
 #For SR44100 SpecRows=660, SR24000 SpecRows=360
-SampleRate = 44100
-SpecRows = 660
+SampleRate = 24000
+SpecRows = 360
 
 def SpecGen(filepath):
     """
@@ -88,9 +88,9 @@ def getBoxCoordinates(item, SpecRows):
 
 ########################################################## JSON to CSV ########################################################################
 
-JSON_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\44100HzSR\\jsonFiles\\AliLabels\\'
-WAV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\44100HzSR\\wavFiles\\'
-csv_file = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\Data\\Transport\\SE3_TransportFileLabels.csv"
+JSON_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\24000HzSR\\jsonFiles\\AliLabels_Elements\\'
+WAV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\24000HzSR\\wavFiles\\'
+csv_file = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\Data\\Ali\\24000Hz_Label_Elements.csv"
 filesInFolder = os.listdir(JSON_DIR)
 resultFile = open(csv_file,'w', newline='')
 wr = csv.writer(resultFile)
