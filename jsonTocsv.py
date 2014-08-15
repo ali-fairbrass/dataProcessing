@@ -92,8 +92,8 @@ JSON_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Soun
 WAV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\24000HzSR\\wavFiles\\'
 csv_file = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\Data\\Ali\\24000Hz_Label_Elements.csv"
 filesInFolder = os.listdir(JSON_DIR)
-resultFile = open(csv_file,'w', newline='')
-wr = csv.writer(resultFile)
+resultFile = open(csv_file,'wb')
+wr = csv.writer(resultFile, dialect='excel')
 wr.writerow(["SiteCode-EquipmentCode"]+["Date"]+["RecordingStartTime"]+["Label"]+["LabelStartTime_Seconds"]+["LabelEndTime_Seconds"]+["MinimumFreq_Hz"]+["MaxFreq_Hz"]+["MaxAmp"]+["MinAmp"]+["MeanAmp"]+["AmpSD"]+["LabelArea_DataPoints"])
 
 #Define data
