@@ -24,3 +24,21 @@ def copyRandomFiles(currentdirectory, newdirectory, randomfiles):
     
     for i in fileSelection:
         shutil.copy(i, newdirectory)
+
+def moveFileTypes(currentdirectory, newdirectory, fileType):
+    """
+    Function to move files with a defined extension to a new location.
+
+    fileType must be defined in the format ".xxx", for example ".csv" or ".json". 
+    """
+    import glob
+    import shutil
+
+    dirExtention = currentdirectory + "/*" + fileType
+    fileList = glob.glob(dirExtention)
+
+    for i in fileList:
+        shutil.move(i, newdirectory)
+    
+# moveFileTypes("C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/44100HzSR/jsonFiles/AliLabels_Elements",
+#     "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/44100HzSR/csvFiles", ".csv")

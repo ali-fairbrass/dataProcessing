@@ -7,7 +7,7 @@ jsonFiles = os.listdir(JSON_DIR)
 wavFiles = os.listdir(WAV_DIR)
 
 #Open csv results file
-csv_file = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\Data\\Ali\\WavFilesWithoutLabels.csv"
+csv_file = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Acoustic analysis\\Sound_Files\\25_Files\\Data\\Ali\\WavFilesWithoutLabels_Test.csv"
 resultFile = open(csv_file,'wb')
 wr = csv.writer(resultFile, dialect='excel')
 wr.writerow(["SiteCode-EquipmentCode"]+["Date"]+["RecordingStartTime"])
