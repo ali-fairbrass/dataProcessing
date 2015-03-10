@@ -46,13 +46,19 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 	return wavWOcsv, wavfileList
 
 def labelSizeBelow12kHzThreshold(df):
-	maxF = row[11]
-
-
+	maxF = row[12]
+	minF = row[11]
+	x1 = row[5]
+	x2 = row[7]
+	y1 = row[6]
+	y2 = row[8]
 
 	for row in df:
-		if row[11] < 12000:
-			labelSize = (row[8] - row[6]) * (row[7] - row[5])
+		if maxF < 12000:
+			labelSize = (x2 - x1) * (y2 - y1)
+		elif maxF > 12000 and minF < 12000:
+			wholeLabel = (x2 - x1) * (y2 - y1)
+			
 
 
 def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
