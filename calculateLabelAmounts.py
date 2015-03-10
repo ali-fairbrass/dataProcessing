@@ -45,6 +45,16 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 
 	return wavWOcsv, wavfileList
 
+def labelSizeBelow12kHzThreshold(df):
+	maxF = row[11]
+
+
+
+	for row in df:
+		if row[11] < 12000:
+			labelSize = (row[8] - row[6]) * (row[7] - row[5])
+
+
 def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 
 	results = []
@@ -64,6 +74,9 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	            if df.shape[0] == 1:
 	                row.append('0')
 	            else:
+	            	### additional if statement should go here to condition the frequency of boxes to add
+	                ### maybe have a function which calculates the size of boxes that overlap the frequency threshold
+	                ### and then append vales to label_subset
 	                label_subset = df[df['Label'] == label]
 	                row.append(str(label_subset.sum()['LabelArea_DataPoints']))
 	        results.append(row)
@@ -93,10 +106,13 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
 # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
 
-csvRM143YB = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_Label_Elements"
-wavRM143YB = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_SM2+'
+# csvRM143YB = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_Label_Elements"
+# wavRM143YB = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_SM2+'
+
+csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
+wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
 resultsFolder = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmounts"
-resultsName = "RM143YB_LabelAmounts_All"
+resultsName = "SM2BAT_LabelAmounts"
 
-calculateLabelAmounts(csvRM143YB, wavRM143YB, resultsFolder, resultsName)
+calculateLabelAmounts(csvSM2BAT, wavSM2BAT, resultsFolder, resultsName)

@@ -151,3 +151,8 @@ def copyRandomFiles(currentdirectory, newdirectory, randomfiles):
     
     for i in fileSelection:
         shutil.copy(i, newdirectory)
+
+inFolder = "Z:\\KateJonesgroup\\Ali\\Fieldwork_Data\\2014\\Churchyards\\E14_0EY\\SM2+_Sliced"
+outFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Sound_Files\\25_Files\\2014\\SM2+"
+
+copyRandomFiles(inFolder, outFolder, 25)
