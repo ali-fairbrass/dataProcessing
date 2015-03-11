@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 import os
-from pandas import read_csv
+import pandas as pd
 import itertools
 
 def getLabelList(csvfileDirectory):
@@ -45,22 +45,24 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 
 	return wavWOcsv, wavfileList
 
-def labelSizeBelow12kHzThreshold(df):
-	maxF = row[12]
-	minF = row[11]
-	x1 = row[5]
-	x2 = row[7]
-	y1 = row[6]
-	y2 = row[8]
-
-	for row in df:
-		if maxF < 12000:
-			labelSize = (x2 - x1) * (y2 - y1)
-		elif maxF > 12000 and minF < 12000:
-			wholeLabel = (x2 - x1) * (y2 - y1)
+def labelSizeBelow12kHz(specHeight, sampleRate, csvfileDirectory, resultsFileDirectory, resultsFileName):
+    
+    csvfileList = os.listdir(csvfileDirectory) 
+    
+    yValueAt12kHz = (specHeight - (12000/((sampleRate/2)/specHeight)))
+    
+    for csvFile in csvfileList:
+        filePath = csvfileDirectory + '\\' + csvFile
+        df = read_csv(filePath)
+        if df.shape[0] != 1:
+            df['LabelArea_Datapoints_Threshold'] = np.where(df['MaximumFreq_Hz'] < 12000, 
+                                                    ((df['Spec_x2'] - df['Spec_x1']) * (df['Spec_y2'] - df['Spec_y1'])),
+                                                    ((df['Spec_x2'] - df['Spec_x1']) * (df['Spec_y2'] - yValueAt12kHz)))
+            df['LabelArea_Datapoints_Threshold'][df['LabelArea_Datapoints_Threshold'] < 0] = 0
+            df.to_csv(resultsFileDirectory + "\\" + csvFile[:-18] + resultsFileName + ".csv", sep=',', index=False) #use -14 for 24 and 44.1kHz and -18 for RM143YB
+        else:
+            pass
 			
-
-
 def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 
 	results = []
@@ -80,9 +82,6 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	            if df.shape[0] == 1:
 	                row.append('0')
 	            else:
-	            	### additional if statement should go here to condition the frequency of boxes to add
-	                ### maybe have a function which calculates the size of boxes that overlap the frequency threshold
-	                ### and then append vales to label_subset
 	                label_subset = df[df['Label'] == label]
 	                row.append(str(label_subset.sum()['LabelArea_DataPoints']))
 	        results.append(row)
