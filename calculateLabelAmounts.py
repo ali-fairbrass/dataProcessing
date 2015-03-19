@@ -2,6 +2,7 @@ import csv
 import numpy as np
 import os
 import pandas as pd
+from pandas import read_csv
 import itertools
 
 def getLabelList(csvfileDirectory):
@@ -30,7 +31,7 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 
 	csvfileListBase = []
 	for csvFile in csvfileList:
-	    csvBaseName = csvFile[:-14]
+	    csvBaseName = csvFile[:-15]
 	    csvfileListBase.append(csvBaseName)
 	    
 	wavFileListBase = []
@@ -75,7 +76,7 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	        row = list(itertools.chain(*row))
 	        results.append(row)
 	    else:
-	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv'
+	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '_below12kHz.csv'
 	        df = read_csv(filePath)
 	        row.append(wavFile)
 	        for label in labelList:
@@ -83,7 +84,7 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	                row.append('0')
 	            else:
 	                label_subset = df[df['Label'] == label]
-	                row.append(str(label_subset.sum()['LabelArea_DataPoints']))
+	                row.append(str(label_subset.sum()['LabelArea_Datapoints_Threshold']))
 	        results.append(row)
 
 	return results
@@ -105,8 +106,21 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # Code to implement functions
 
-# csv441kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/44100HzSR/csvFiles/Transport"
-# wav441kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/44100HzSR/wavFiles'
+# To generate threshold data
+
+# labelSizeBelow12kHz(360, 24000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\24000kHz", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\24000kHz", "_below12kHz")
+
+# labelSizeBelow12kHz(660, 44100, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\44100kHz", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\44100kHz", "_below12kHz")
+
+# labelSizeBelow12kHz(2880, 192000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\192000kHz", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\192000kHz", "_below12kHz")
+
+# To generate overall label amounts data
+
+csv441kHz = "C:/Users/ucfaalf/Documents/Projects/Chapter2/SoundFiles/LabelsCSVThreshold/24000kHz"
+wav441kHz = 'C:/Users/ucfaalf/Documents/Projects/Chapter2/SoundFiles/Amalgamated_Files'
 
 # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
 # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
@@ -114,10 +128,10 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 # csvRM143YB = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_Label_Elements"
 # wavRM143YB = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_SM2+'
 
-csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
-wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
+# csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
+# wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
-resultsFolder = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmounts"
-resultsName = "SM2BAT_LabelAmounts"
+resultsFolder = "C:/Users/ucfaalf/Documents/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmountsThreshold"
+resultsName = "24000_LabelAmountsThreshold"
 
-calculateLabelAmounts(csvSM2BAT, wavSM2BAT, resultsFolder, resultsName)
+calculateLabelAmounts(csv441kHz, wav441kHz, resultsFolder, resultsName)
