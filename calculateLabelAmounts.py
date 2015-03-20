@@ -60,7 +60,7 @@ def labelSizeBelow12kHz(specHeight, sampleRate, csvfileDirectory, resultsFileDir
                                                     ((df['Spec_x2'] - df['Spec_x1']) * (df['Spec_y2'] - df['Spec_y1'])),
                                                     ((df['Spec_x2'] - df['Spec_x1']) * (df['Spec_y2'] - yValueAt12kHz)))
             df['LabelArea_Datapoints_Threshold'][df['LabelArea_Datapoints_Threshold'] < 0] = 0
-            df.to_csv(resultsFileDirectory + "\\" + csvFile[:-18] + resultsFileName + ".csv", sep=',', index=False) #use -14 for 24 and 44.1kHz and -18 for RM143YB
+            df.to_csv(resultsFileDirectory + "\\" + csvFile[:-14] + resultsFileName + ".csv", sep=',', index=False) #use -14 for 24 and 44.1kHz and -18 for RM143YB
         else:
             pass
 			
@@ -108,30 +108,30 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # To generate threshold data
 
-# labelSizeBelow12kHz(360, 24000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\24000kHz", 
-#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\24000kHz", "_below12kHz")
+# labelSizeBelow12kHz(360, 24000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Acoustic Analysis\\2013Random\\LabelsCSVTransport\\24000HzSR", 
+#                            "C:\\Users\\ucfaalf\\Dropbox\\EngD\Projects\\Chapter 2 Acoustic analysis\\Data\\LabelsCSVTransportThreshold\\24000HzSR", "_below12kHz")
 
-# labelSizeBelow12kHz(660, 44100, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\44100kHz", 
-#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\44100kHz", "_below12kHz")
+# labelSizeBelow12kHz(660, 44100, "C:\\Users\\ucfaalf\\Documents\\Projects\\Acoustic Analysis\\2013Random\\LabelsCSVTransport\\41000HzSR", 
+#                            "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Data\\LabelsCSVTransportThreshold\\41000HzSR", "_below12kHz")
 
 # labelSizeBelow12kHz(2880, 192000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\192000kHz", 
 #                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\192000kHz", "_below12kHz")
 
-# To generate overall label amounts data
+# # To generate overall label amounts data
 
-csv441kHz = "C:/Users/ucfaalf/Documents/Projects/Chapter2/SoundFiles/LabelsCSVThreshold/24000kHz"
-wav441kHz = 'C:/Users/ucfaalf/Documents/Projects/Chapter2/SoundFiles/Amalgamated_Files'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Data\\LabelsCSVTransportThreshold\\44100HzSR"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Acoustic Analysis\\2013Random\\Amalgamated_Files'
 
-# csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
-# wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
+# # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
+# # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
 
-# csvRM143YB = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_Label_Elements"
-# wavRM143YB = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_SM2+'
+# # csvRM143YB = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_Label_Elements"
+# # wavRM143YB = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/RM14_3YB_SM2+'
 
-# csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
-# wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
+# # csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
+# # wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
-resultsFolder = "C:/Users/ucfaalf/Documents/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmountsThreshold"
-resultsName = "24000_LabelAmountsThreshold"
+resultsFolder = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmountsThreshold"
+resultsName = "44100_LabelAmountsThresholdTransport"
 
-calculateLabelAmounts(csv441kHz, wav441kHz, resultsFolder, resultsName)
+calculateLabelAmounts(csvFolder, wavFolder, resultsFolder, resultsName)
