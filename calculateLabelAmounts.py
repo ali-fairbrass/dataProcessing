@@ -63,6 +63,24 @@ def labelSizeBelow12kHz(specHeight, sampleRate, csvfileDirectory, resultsFileDir
             df.to_csv(resultsFileDirectory + "\\" + csvFile[:-14] + resultsFileName + ".csv", sep=',', index=False) #use -14 for 24 and 44.1kHz and -18 for RM143YB
         else:
             pass
+
+def labelSizeAbove12kHz(specHeight, sampleRate, csvfileDirectory, resultsFileDirectory, resultsFileName):
+    
+    csvfileList = os.listdir(csvfileDirectory) 
+    
+    yValueAt12kHz = (specHeight - (12000/((sampleRate/2)/specHeight)))
+    
+    for csvFile in csvfileList:
+        filePath = csvfileDirectory + '\\' + csvFile
+        df = read_csv(filePath)
+        if df.shape[0] != 1:
+            df['LabelArea_Datapoints_Threshold'] = np.where(df['MinimumFreq_Hz'] > 12000, 
+                                                    ((df['Spec_x2'] - df['Spec_x1']) * (df['Spec_y2'] - df['Spec_y1'])),
+                                                    ((df['Spec_x2'] - df['Spec_x1']) * (yValueAt12kHz - df['Spec_y1'])))
+            df['LabelArea_Datapoints_Threshold'][df['LabelArea_Datapoints_Threshold'] < 0] = 0
+            df.to_csv(resultsFileDirectory + "\\" + csvFile[:-14] + resultsFileName + ".csv", sep=',', index=False) #use -14 for 24 and 44.1kHz and -18 for RM143YB
+        else:
+            pass
 			
 def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 
@@ -106,7 +124,7 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # Code to implement functions
 
-# To generate threshold data
+# To generate threshold data for SM2+
 
 # labelSizeBelow12kHz(360, 24000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Acoustic Analysis\\2013Random\\LabelsCSVTransport\\24000HzSR", 
 #                            "C:\\Users\\ucfaalf\\Dropbox\\EngD\Projects\\Chapter 2 Acoustic analysis\\Data\\LabelsCSVTransportThreshold\\24000HzSR", "_below12kHz")
@@ -116,6 +134,20 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # labelSizeBelow12kHz(2880, 192000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSV\\192000kHz", 
 #                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\SoundFiles\\LabelsCSVThreshold\\192000kHz", "_below12kHz")
+
+# To generate threshold data for SM2BAT+
+
+# labelSizeAbove12kHz(288, 192000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+\\192kHzSR", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+_Threshold\\192kHzSR", 
+#                            "_above12kHz")
+
+# labelSizeAbove12kHz(576, 384000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+\\384kHzSR", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+_Threshold\\384kHzSR", 
+#                            "_above12kHz")
+
+# labelSizeAbove12kHz(288, 192000, "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+\\RM143YB", 
+#                            "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+_Threshold\\RM143YB", 
+#                            "_above12kHz")
 
 # # To generate overall label amounts data
 
