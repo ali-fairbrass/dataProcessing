@@ -1,7 +1,7 @@
 import os
 
-ip_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Amalgamated_Files_192kHz'  # input folder containing audio files
-op_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Amalgamated_Files_192SR_12HPF'  # destination   
+ip_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+_cropped/'  # input folder containing audio files
+op_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+_cropped_HPF12/'  # destination   
 
 audio_files = os.listdir(ip_dir)  # assumes only audio files in this directory
 
