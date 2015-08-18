@@ -7,28 +7,32 @@ import glob
 data_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+/'
 op_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+_cropped/'
 
-if not os.path.exists(op_dir):
-    os.mkdir(op_dir)
+def cropAudioByTime(inputdirectory, outputdirectory):
 
-start_time = 0.0 # seconds    
-crop_duration = 2.0  # seconds
 
-audio_files = glob.glob(data_dir + '*.wav')
+    if not os.path.exists(outputdirectory):
+        os.mkdir(outputdirectory)
 
-# op_info = []
+    start_time = 0.0 # seconds    
+    crop_duration = 2.0  # seconds
 
-for ii, file_name_full in enumerate(audio_files):
+    audio_files = glob.glob(inputdirectory + "\\" + '*.wav')
 
-    file_name = os.path.basename(file_name_full)
-    #df_loc = df[df['Filename'] == file_name]
-    sampling_rate, x_full = wavfile.read(file_name_full)
-    file_duration = x_full.shape[0] / float(sampling_rate)
+    for ii, file_name_full in enumerate(audio_files):
 
-    print '\n', os.path.basename(file_name), file_duration
+        file_name = os.path.basename(file_name_full)
+        #df_loc = df[df['Filename'] == file_name]
+        sampling_rate, x_full = wavfile.read(file_name_full)
+        file_duration = x_full.shape[0] / float(sampling_rate)
 
-    # crop
-    x_crop = x_full[sampling_rate*start_time:sampling_rate*(start_time+crop_duration)]
+        print '\n', os.path.basename(file_name), file_duration
 
-    # save
-    op_file_name = op_dir + file_name[:-4] + '.wav'
-    wavfile.write(op_file_name, sampling_rate, x_crop)
+        # crop
+        x_crop = x_full[sampling_rate*start_time:sampling_rate*(start_time+crop_duration)]
+
+        # save
+        op_file_name = outputdirectory + "\\" + file_name[:-4] + '.wav'
+        wavfile.write(op_file_name, sampling_rate, x_crop)
+
+cropAudioByTime('C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\testSM2BAT+',
+    'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\testSM2BAT+_cropped')
