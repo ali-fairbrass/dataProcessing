@@ -92,14 +92,19 @@ def moveTempFiletoFinalDirectory(tempRandomSelectionDirectory, finalRandomSelect
     moveFiles(tempRandomSelectionDirectory, finalRandomSelectionDirectory)
     moveFiles(tempCropFilesDirectory, finalCropFilesDirectory)
 
-allSM2BATFilesDirectory = "Z:\\KateJonesgroup\\Ali\\Fieldwork_Data\\2015\\BR20EG\\SM2BAT+"
-tempRandomSelectionDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2BAT+"
-finalRandomSelectionDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\SM2BAT+"
-tempCropFilesDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2BAT+_cropped"
-finalCropFilesDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\SM2BAT+_cropped"
-finalDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\final_SM2BAT+_test"
+allSM2BATFilesDirectory = "Y:\\Fieldwork_Data\\2015\\RM154HX\\SM2BAT+"
+tempRandomSelectionDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2BAT+"
+finalRandomSelectionDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\SM2BAT+"
+tempCropFilesDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2BAT+_cropped"
+finalCropFilesDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\SM2BAT+_cropped"
+finalDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\SM2BAT+_cropped_HPF12"
 
+# folders = ['CM167NP','DA5','RM41PL','N17', 'BR4']
 
-processSM2BAT(allSM2BATFilesDirectory, tempRandomSelectionDirectory, cropFilesDirectory, finalDirectory)
+# for site in folders:
+#     allSM2BATFilesDirectory = "X:\\Fieldwork_Data\\2015\\" + site + "\\SM2+_Sliced"
+#     processSM2BAT(allSM2BATFilesDirectory, tempRandomSelectionDirectory, tempCropFilesDirectory, finalDirectory)
+#     moveTempFiletoFinalDirectory(tempRandomSelectionDirectory, finalRandomSelectionDirectory, tempCropFilesDirectory, finalCropFilesDirectory)
 
+processSM2BAT(allSM2BATFilesDirectory, tempRandomSelectionDirectory, tempCropFilesDirectory, finalDirectory)
 moveTempFiletoFinalDirectory(tempRandomSelectionDirectory, finalRandomSelectionDirectory, tempCropFilesDirectory, finalCropFilesDirectory)

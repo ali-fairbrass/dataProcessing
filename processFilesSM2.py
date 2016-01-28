@@ -62,10 +62,17 @@ def moveTempFiletoFinalDirectory(tempRandomSelectionDirectory, finalRandomSelect
     moveFiles(tempRandomSelectionDirectory, finalRandomSelectionDirectory)
 
 
-allSM2FilesDirectory = "X:\\Fieldwork_Data\\2015\\BR20EG\\SM2+_Sliced"
-tempSM2FilesDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2+"
-downsampledM2FilesDirectory = "X:\\Fieldwork_Data\\2015\\Random_25\\test_SM2+_downsample"
+allSM2FilesDirectory = "Y:\\Fieldwork_Data\\2015\\SE232NZ\\SM2+_Sliced"
+tempSM2FilesDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2+"
+downsampledSM2FilesDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_downSample"
+finalRandomSelectionDirectory = "Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+"
 
-# processSM2(allSM2FilesDirectory, tempSM2FilesDirectory, downsampledM2FilesDirectory)
-moveTempFiletoFinalDirectory(tempSM2FilesDirectory, downsampledM2FilesDirectory)
+processSM2(allSM2FilesDirectory, tempSM2FilesDirectory, downsampledSM2FilesDirectory)
+moveTempFiletoFinalDirectory(tempSM2FilesDirectory, finalRandomSelectionDirectory)
 
+# folders = ['CM167NP','DA5','RM41PL','N17', 'BR4']
+
+# for siteFolder in folders:
+#     allSM2FilesDirectory = "X:\\Fieldwork_Data\\2015\\" + siteFolder + "\\SM2+_Sliced"
+#     processSM2(allSM2FilesDirectory, tempSM2FilesDirectory, downsampledSM2FilesDirectory)
+#     moveTempFiletoFinalDirectory(tempSM2FilesDirectory, finalRandomSelectionDirectory)

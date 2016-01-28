@@ -33,5 +33,9 @@ def cropSM2Files(inputdirectory, outputdirectory):
             wavfile.write(op_file_name, sampling_rate, x_crop)
 
 
-cropSM2Files("C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\test29mins", "C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\test1mins")
+# SM2Folders = ['BR4', 'N17', 'DA5', 'RM41PL']
+# for folder in SM2Folders:
+#     cropSM2Files("F:\\Fieldwork_Data\\2015\\" + folder + "\\SM2+", "X:\\Fieldwork_Data\\2015\\" + folder + "\\SM2+_Sliced")
+                
+cropSM2Files("Z:\\KateJonesgroup\\Ali\\Fieldwork_Data\\2015\\TN147QB\\SM2+", "Y:\\Fieldwork_Data\\2015\\TN147QB\\SM2+_Sliced")
                 

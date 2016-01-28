@@ -5,9 +5,9 @@ import os
 import csv
 import shutil
 
-CSV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Sound_Files\\25_Files\\2014\\Labels'
-WAV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Sound_Files\\25_Files\\2014\\SM2+'
-OUT_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Sound_Files\\25_Files\\2014\\birdFiles'
+CSV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Labels35From6Sites'
+WAV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\35From6Sites_24kHz'
+OUT_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\35From6Sites_Birds'
 csvFiles = os.listdir(CSV_DIR)
 wavFiles = os.listdir(WAV_DIR)
 
@@ -44,8 +44,9 @@ for wav in wavFileList:
     if wav in csvBaseList:
         wavExtension = WAV_DIR + '\\' + wav + ".wav"
         shutil.copy(wavExtension, OUT_DIR)
+        print "Copying file: " + wav
 
 #Write filenames to csv file
-with open('C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Sound_Files\\25_Files\\2014\\birdFiles\\birdFiles.csv', 'wb') as f:
+with open(OUT_DIR + '\\birdFiles.csv', 'wb') as f:
     writer = csv.writer(f)
     writer.writerows([sorted(csvBaseList)])

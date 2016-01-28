@@ -27,11 +27,11 @@ def copyRandomFiles(currentdirectory, newdirectory, randomfiles):
     for i in fileSelection:
         shutil.copy(i, newdirectory)
 
-ip_dir = 'X:\\Fieldwork_Data\\2015\\BR28LB\\SM2+_Sliced'
-op_dir = 'X:\\Fieldwork_Data\\2015\\Random_25\\BR28LB'
+ip_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013RandomFilesContainingBirds'
+op_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\humanLabelTest\\soundFiles'
 
 if not os.path.exists(op_dir):
         os.makedirs(op_dir)
 
 copyRandomFiles(ip_dir, 
-            op_dir, 25)
+            op_dir, 17)
