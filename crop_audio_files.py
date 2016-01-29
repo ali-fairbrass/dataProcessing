@@ -5,11 +5,11 @@ import os
 import glob
 
 # TODO set these
-op_dir = 'C:/Users/omacaodh/Downloads/urban_sounds/cropped_audio/'
-op_labels_file = 'C:/Users/omacaodh/Downloads/urban_sounds/cropped_label.txt'
+op_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\cropped_audio\\'
+op_labels_file = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Data\\above12kHz_cropped_label.txt'
 
-label_file = 'C:/Users/omacaodh/Downloads/urban_sounds/urban_sounds_labels.csv'
-data_dir = 'C:/Users/omacaodh/Downloads/urban_sounds/audio/'
+label_file = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Data\\LabelsCSVSM2BAT+Threshold\\urban_sounds_ultra_labels.csv'
+data_dir = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Amalgamated_Files_192SR_12HPF\\'
 
 if not os.path.exists(op_dir):
     os.mkdir(op_dir)
