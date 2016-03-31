@@ -56,6 +56,7 @@ def createResultsForSitesWGI(listOfSitesWGI, results, GIlist):
 	    
 	for site in listOfSitesWGI:
 	    siteResults = []
+	    # print "site: " + str(site)
 
 	    for result in results:
 	        if result[1] == site:
@@ -68,9 +69,13 @@ def createResultsForSitesWGI(listOfSitesWGI, results, GIlist):
 	        row.append(result[1])
 	        for GItype in GIlist:
 	            if [result[2]] == GItype:
-	                row.append(result[-1])
+	            	row.append(result[-1])
+	              
+	                print "Site: " + str(site) + "with GI type " + str(GItype) + " of area " + str(result[-1])
 	            else:
+	            	# print "GI area: " + str("0")
 	                row.append('0')
+	        print "Row of results: " + str(row)
 	        siteWGIresults.append(row)
 
 	return siteWGIresults

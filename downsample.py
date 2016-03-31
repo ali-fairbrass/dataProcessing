@@ -1,7 +1,7 @@
 import os
 
-inputdirectory = 'Y:\\Fieldwork_Data\\2015\\Random_25\\temp_SM2+'  # input folder containing audio files
-outputdirectory = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_downSample'  # destination   
+inputdirectory = "C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\extra30From6Sites"  # input folder containing audio files
+outputdirectory = "C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\extra30From6Sites_24kHz"  # destination   
 
 def downSample(inputdirectory, outputdirectory):
 
