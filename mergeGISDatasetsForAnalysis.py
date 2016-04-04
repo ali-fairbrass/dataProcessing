@@ -6,18 +6,21 @@ DIR = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\
 df = pd.read_csv(DIR + "Stage2 - dataProcessing\\amountLandGroupPerSite.csv")
 df.rename(columns={'Site': 'SSS'}, inplace=True)
 
+	# Amalgamate protected area values
+PA_list = ['Protected Area', 'Forested Protected Area', 'Non-forested Protected Area']
+df['Protected Area'] = df[PA_list].sum(axis=1)
+
 col_list= list(df)
 col_list.remove('SSS')
+
 df['percentCover'] = (df.sum(axis=1) / 3140000) * 100
 df.ix[df.percentCover > 100, 'percentCover'] = 100
 
 df['Agricultural_Rounded'] = (df['Agricultural'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 df['Blue Infrastructure_Rounded'] = (df['Blue Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 df['Forested Green Infrastructure_Rounded'] = (df['Forested Green Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
-df['Forested Protected Area_Rounded'] = (df['Forested Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 df['Impervious_Rounded'] = (df['Impervious'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 df['Non-forested Green Infrastructure_Rounded'] = (df['Non-forested Green Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
-df['Non-forested Protected Area'] = (df['Non-forested Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 df['Protected Area_Rounded'] = (df['Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 
 # Nearest Non-impervious data
