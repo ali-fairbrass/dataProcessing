@@ -1,10 +1,24 @@
 import pandas as pd
 
 # OSM data
+DIR = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\\Data\\"
 
-DIR = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\\Data\\"
 df = pd.read_csv(DIR + "Stage2 - dataProcessing\\amountLandGroupPerSite.csv")
 df.rename(columns={'Site': 'SSS'}, inplace=True)
+
+col_list= list(df)
+col_list.remove('SSS')
+df['percentCover'] = (df.sum(axis=1) / 3140000) * 100
+df.ix[df.percentCover > 100, 'percentCover'] = 100
+
+df['Agricultural_Rounded'] = (df['Agricultural'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Blue Infrastructure_Rounded'] = (df['Blue Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Forested Green Infrastructure_Rounded'] = (df['Forested Green Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Forested Protected Area_Rounded'] = (df['Forested Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Impervious_Rounded'] = (df['Impervious'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Non-forested Green Infrastructure_Rounded'] = (df['Non-forested Green Infrastructure'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Non-forested Protected Area'] = (df['Non-forested Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
+df['Protected Area_Rounded'] = (df['Protected Area'] / (df[col_list].sum(axis=1) / 100)) * (3140000/100)
 
 # Nearest Non-impervious data
 
@@ -26,7 +40,7 @@ dfAdminData.rename(columns={'admin': 'Country', 'continent': 'Continent'}, inpla
 
 # Study and class data
 
-DIR1 = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\\Data\\dataForAnalysis\\"
+DIR1 = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\\Data\\dataForAnalysis\\"
 dfTaxon = pd.read_csv(DIR1 + "allClass.csv")
 cols = list(dfTaxon.columns.values)[1:]
 cols.insert(-3, 'Class')
@@ -34,12 +48,20 @@ cols = cols[:-3]
 dfTaxon = dfTaxon[cols]
 dfTaxon.rename(columns={'Class': 'TaxonClass'}, inplace=True)
 
-# Merge dataframes
+# Merge dataframes and remove dulicate rows (duplicates caused by bug which dulpictes rows when dates are present in dataframe)
 
 dfFinal = pd.merge(left=dfTaxon,right=dfAdminData, how='left', left_on='SSS', right_on='SSS')
 dfFinal = pd.merge(left=dfFinal,right=dfEcoregion, how='left', left_on='SSS', right_on='SSS')
 dfFinal = pd.merge(left=dfFinal,right=dfNearest, how='left', left_on='SSS', right_on='SSS')
 dfFinal = pd.merge(left=dfFinal,right=df, how='left', left_on='SSS', right_on='SSS')
+dfFinal = dfFinal.drop_duplicates()
+
+# Replace NAs in OSM columns with zeros
+
+col_list= list(df)
+col_list.remove('SSS')
+for column in col_list:
+    dfFinal[column].fillna(0, inplace=True)
 
 # Write to csv
 
