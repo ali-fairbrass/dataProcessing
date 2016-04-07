@@ -41,15 +41,15 @@ dfAdminData = pd.read_csv(DIR + "TabelsfromGIS\\SitesCountryContinent.csv")
 dfAdminData = dfAdminData[['SSS', 'admin', 'continent']]
 dfAdminData.rename(columns={'admin': 'Country', 'continent': 'Continent'}, inplace=True)
 
-# Study and class data
+# Study and phylum data
 
 DIR1 = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 1 Systematic Review\\Data\\dataForAnalysis\\"
-dfTaxon = pd.read_csv(DIR1 + "allClass.csv")
+dfTaxon = pd.read_csv(DIR1 + "allKingdom.csv")
 cols = list(dfTaxon.columns.values)[1:]
-cols.insert(-3, 'Class')
+cols.insert(-3, 'Kingdom')
 cols = cols[:-3]
 dfTaxon = dfTaxon[cols]
-dfTaxon.rename(columns={'Class': 'TaxonClass'}, inplace=True)
+dfTaxon.rename(columns={'Kingdom': 'TaxonKingdom'}, inplace=True)
 
 # Merge dataframes and remove dulicate rows (duplicates caused by bug which dulpictes rows when dates are present in dataframe)
 
@@ -68,4 +68,4 @@ for column in col_list:
 
 # Write to csv
 
-dfFinal.to_csv(DIR + 'Stage2 - dataProcessing\\allClassData.csv', index = False, na_rep='NA')
+dfFinal.to_csv(DIR + 'Stage2 - dataProcessing\\allKingdomData.csv', index = False, na_rep='NA')
