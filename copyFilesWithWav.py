@@ -3,8 +3,8 @@ import csv
 import shutil
 
 
-CSV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_VerityLabels'
-WAV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 3\\goldenTestSet\\21VerityFiles'
+CSV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\extra40BioticLabels'
+WAV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\removed15Recordings'
 csvFiles = os.listdir(CSV_DIR)
 wavFiles = os.listdir(WAV_DIR)
     
@@ -14,10 +14,10 @@ for wavFile in wavFiles:
     csvName = wavBaseName + '-sceneRect.csv'
     csvFileList.append(csvName)
 
-#Remove blank files
-csvFileList.remove('BR4-013378_20150820_22000018-sceneRect.csv')
-csvFileList.remove('E29RR-013378_20150530_03000023-sceneRect.csv')
+for i in csvFiles:
+	if i in csvFileList:
+	    print "Moving file: " + i
+	    shutil.move(CSV_DIR + '\\' + i, "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\removed15Labels")
 
-for i in csvFileList:
-    print "Copying file: " + i
-    shutil.copy(CSV_DIR + '\\' + i, "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 3\\goldenTestSet\\21VerityLabels")
+	else:
+		pass
