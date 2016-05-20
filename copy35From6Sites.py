@@ -3,21 +3,25 @@ import glob
 import shutil
 import random
 
-first25FileSelection = os.listdir("C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files")
-extra35from6 = os.listdir("C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\35From6Sites")
-first60FileSelection = first25FileSelection + extra35from6
+first25FileSelection = os.listdir("Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_downSample")
+out_dir = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\extra40Recordings_origSR"
+# extra35from6 = os.listdir("C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 4\\infrasonicDiversityData\\extra40Recordings")
+# first60FileSelection = first25FileSelection + extra35from6
 
-sixSites = ['W8_4LA', 'CR8', 'E10_5JP', 'HA8_6RB', 'RM14 3YB', 'SW11_2PN']
+data_dir = "Y:\\Fieldwork_Data\\2015"
 
-for site in sixSites:
-    dirExtention = "Y:\\Fieldwork_Data\\2013\\" + site + "\\SM2+_Sliced"
-    fileList = os.listdir(dirExtention)
-    fileListMinusFirst60 = [x for x in fileList if x not in first60FileSelection]
+moreSites = os.listdir(data_dir)
+moreSites.remove('Random_25')
 
-    randomNumbers = random.sample(xrange(len(fileListMinusFirst60)), 30)
-    fileSelection = [fileList[i] for i in randomNumbers]
+for site in moreSites:
+	dirExtention = data_dir + "\\" + site + "\\SM2+_Sliced"
+	fileList = os.listdir(dirExtention)
+	fileListMinusFirst25 = [x for x in fileList if x not in first25FileSelection]
 
-    for i in fileSelection:
-    	print "Copying " + str(i)
-        shutil.copy(dirExtention + "\\" + i, "C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\extra30From6Sites")
+	randomNumbers = random.sample(xrange(len(fileListMinusFirst25)), 40)
+	fileSelection = [fileList[i] for i in randomNumbers]
+
+	for i in fileSelection:
+		print "Copying " + str(i)
+		shutil.copy(dirExtention + "\\" + i, out_dir)
 
