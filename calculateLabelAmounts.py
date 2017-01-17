@@ -31,7 +31,7 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 
 	csvfileListBase = []
 	for csvFile in csvfileList:
-	    csvBaseName = csvFile[:-15]
+	    csvBaseName = csvFile[:-14]
 	    csvfileListBase.append(csvBaseName)
 	    
 	wavFileListBase = []
@@ -94,7 +94,7 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	        row = list(itertools.chain(*row))
 	        results.append(row)
 	    else:
-	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '_above12kHz.csv' # Changed from "_below12kHz.csv" for SM2BAT data
+	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv' # Changed from "_below12kHz.csv" for SM2BAT data
 	        df = read_csv(filePath)
 	        row.append(wavFile)
 	        for label in labelList:
@@ -102,7 +102,7 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	                row.append('0')
 	            else:
 	                label_subset = df[df['Label'] == label]
-	                row.append(str(label_subset.sum()['LabelArea_Datapoints_Threshold']))
+	                row.append(str(label_subset.sum()['LabelArea_DataPoints']))
 	        results.append(row)
 
 	return results
@@ -151,8 +151,8 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # # To generate overall label amounts data
 
-csvFolder = "C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Labels_SM2BAT+_Threshold\\RM143YB"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\\Amalgamated_Files'
+csvFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Ali"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
 
 # # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
 # # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
@@ -163,7 +163,7 @@ wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\Chapter2\\2013RandomUltra\
 # # csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
 # # wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
-resultsFolder = "C:/Users/ucfaalf/Documents/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Results/25_Files/LabelAmountsThreshold"
-resultsName = "RM143YB_LabelAmountsThreshold_above12kHz"
+resultsFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelAmounts"
+resultsName = "ali_LabelAmounts"
 
 calculateLabelAmounts(csvFolder, wavFolder, resultsFolder, resultsName)
