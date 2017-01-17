@@ -13,7 +13,7 @@ def highPassFilter(inputdirectory, outputdirectory):
 
 	for file_name in audio_files:
 	    print file_name
-	    os.system('sox ' + inputdirectory + '\\' + file_name + ' ' + outputdirectory + '\\' + file_name + ' sinc 12k')
+	    os.system('sox ' + inputdirectory + '\\' + file_name + ' ' + outputdirectory + '\\' + file_name + ' sinc 12k') # Change to the desired min frequency.
 
 highPassFilter("C:/Users/ucfaalf/Documents/Projects/AcousticAnalysis/testSM2BAT+_cropped",
 	 "C:/Users/ucfaalf/Documents/Projects/AcousticAnalysis/testSM2BAT+_cropped_HPF12")
