@@ -14,7 +14,7 @@ numberOfIterations = 100
 resultsOfIterations = []
 
 # Results file must be single column of avtivity values without column header
-results = np.genfromtxt('C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter 4\\sampleSizeTests\\activityBiophonySingleColumn.csv',  delimiter=",")
+results = np.genfromtxt('C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\sampleSizeTests\\activityBiophonySingleColumn.csv',  delimiter=",")
 
 def getRandomSubset(results, sampleSize):
     random_subset = np.random.choice(results, sampleSize, replace=True)
@@ -69,8 +69,8 @@ for index, ax in enumerate(axarr.ravel()):
     pylab.xlim([0,30])
     ax.set_title(siteNames[index])
 fig.text(0.5, 0.04, 'Sample size (minutes)', ha='center')
-fig.text(0.04, 0.5, 'Average anthropogenic sound activity (occupied spectrogram pixels)\n                  Error bars indicate standard deviation', va='center', rotation='vertical')
+fig.text(0.04, 0.5, 'Average biotic sound activity (occupied spectrogram pixels)\n                  Error bars indicate standard deviation', va='center', rotation='vertical')
 
 # Save fig, enter file path
 
-fig.savefig('.png')
+fig.savefig('C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\sampleSizeTests\\bioticActivityAveragesWithReplacement1.png')

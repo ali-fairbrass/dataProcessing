@@ -41,33 +41,43 @@ from collections import Counter
 #         for row in reader:
 #             Verity21List.append(row[1])
 
-CSV_DIR1 = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\"
+CSV_DIR1 = "Y:\\Fieldwork_Data\\"
 
-allLabels2013 = os.listdir(CSV_DIR1 + "2013Random\\allLabelFiles")
+allLabels2013 = os.listdir(CSV_DIR1 + "2013\\Random_Files_Process\\SM2BAT+_Labels")
 
-allLabels2014 = os.listdir(CSV_DIR1 + "2014Random\\allLabelFiles")
+allLabels2014Church = os.listdir(CSV_DIR1 + "2014\\Random_25\\Churchyard\\SM2BAT+_Labels")
 
-allLabels2015 = os.listdir(CSV_DIR1 + "2015Random\\allLabelFiles")
+allLabels2014GreenRoof = os.listdir(CSV_DIR1 + "2014\\Random_25\\GreenRoof\\SM2BAT+_Labels")
+
+allLabels2015 = os.listdir(CSV_DIR1 + "2015\\Random_25\\SM2BAT+lables")
 
 all2013List = []
 for csvFile in allLabels2013:
-    filePath = CSV_DIR1 + '2013Random\\allLabelFiles\\' + csvFile
+    filePath = CSV_DIR1 + '2013\\Random_Files_Process\\SM2BAT+_Labels\\' + csvFile
     with open(filePath, 'rb') as f:
         reader = csv.reader(f)
         for row in reader:
             all2013List.append(row[1])
 
-all2014List = []
-for csvFile in allLabels2014:
-    filePath = CSV_DIR1 + '2014Random\\allLabelFiles\\' + csvFile
+all2014ChurchList = []
+for csvFile in allLabels2014Church:
+    filePath = CSV_DIR1 + '2014\\Random_25\\Churchyard\\SM2BAT+_Labels\\' + csvFile
     with open(filePath, 'rb') as f:
         reader = csv.reader(f)
         for row in reader:
-            all2014List.append(row[1])
+            all2014ChurchList.append(row[1])
+
+all2014GreenRoofList = []
+for csvFile in allLabels2014GreenRoof:
+    filePath = CSV_DIR1 + '2014\\Random_25\\GreenRoof\\SM2BAT+_Labels\\' + csvFile
+    with open(filePath, 'rb') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            all2014GreenRoofList.append(row[1])
 
 all2015List = []
 for csvFile in allLabels2015:
-    filePath = CSV_DIR1 + '2015Random\\allLabelFiles\\' + csvFile
+    filePath = CSV_DIR1 + '2015\\Random_25\\SM2BAT+lables\\' + csvFile
     with open(filePath, 'rb') as f:
         reader = csv.reader(f)
         for row in reader:
@@ -76,13 +86,18 @@ for csvFile in allLabels2015:
 
 #mergedList = Ali19List + Verity19List + Jiemin19List + Verity21List + all2013List + all2014List + all2015List
 
-mergedList = all2013List + all2014List + all2015List
+mergedList = all2013List + all2014ChurchList + all2014GreenRoofList + all2015List
 
-print Counter(mergedList)
+# print Counter(mergedList)
+labelFrequency = list(Counter((mergedList)).items())
+print labelFrequency
 # print sorted(list(set(mergedList)))
 # print len(list(set(mergedList)))
 
-#with open(CSV_DIR + "listOfLabels.csv", 'wb') as myfile:
- #   wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-  #  wr.writerow(sorted(list(set(mergedList))))
+CSV_DIR = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\Data\\ultrasonic\\"
 
+with open(CSV_DIR + "listOfLabels.csv", 'wb') as myfile:
+    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+    wr.writerow(['Label', 'Frequency'])
+    for row in labelFrequency:
+        wr.writerow(row)

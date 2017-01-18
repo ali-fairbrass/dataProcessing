@@ -2,7 +2,7 @@
 import os
 import csv
 
-CSV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+labels'
+CSV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\extra25BioticLabels'
 
 csvFiles = os.listdir(CSV_DIR)
 
@@ -16,4 +16,4 @@ for csvFile in csvFiles:
 
 labelListNoDuplicates = list(set(labelList))
 
-print labelListNoDuplicates
+print sorted(labelListNoDuplicates)

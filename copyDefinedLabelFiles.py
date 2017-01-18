@@ -2,9 +2,9 @@ import os
 import csv
 import shutil
 
-CSV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+labels'
-WAV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_downSample'
-OUT_DIR = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4\\infrasonicDiversityTest\\first25BioticRecordings\\nonChurch2015"
+CSV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\LabelsCSV'
+WAV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
+OUT_DIR = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 2 Acoustic analysis\\Fairbrass_JoAE\\WorkingFile\\Figures\\FigS2\\exampleAudio"
 csvFiles = os.listdir(CSV_DIR)
 wavFiles = os.listdir(WAV_DIR)
 
