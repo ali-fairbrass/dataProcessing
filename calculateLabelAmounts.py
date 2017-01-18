@@ -87,7 +87,7 @@ def sumLabelSizes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 	results = []
 	zerosList = [0] * len(labelList)
 
-	for wavFile in wavfileList:
+	for wavFile in sorted(wavfileList):
 	    row = []
 	    if wavFile[:-4] in wavWOcsv:
 	        row.append([wavFile] + zerosList)
