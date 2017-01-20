@@ -62,23 +62,24 @@ def getTotalTimeWithSound(allSecondsList):
     merged = list(itertools.chain(*allSecondsList))
     myFormattedList = [ '%.2f' % elem for elem in merged ]
     lst = list(set(myFormattedList))
-    lst1 = [float(i) for i in lst]
-    maxTime = max(lst1)
-    minTime = min(lst1)
-    totalTimeWithSound = maxTime - minTime
+    totalTimeWithSound = len(lst)*0.01
     return totalTimeWithSound
+
+
 
 def sumLabelTimes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 
 	results = []
-	zerosList = [0] * len(labelList)
+	zerosList = [0] * (labelList)
 
 	for wavFile in wavfileList:
 	    row = []
 	    if wavFile[:-4] in wavWOcsv:
 	        row.append([wavFile] + zerosList)
 	        row = list(itertools.chain(*row))
+	        print row
 	        results.append(row)
+	        print results
 	    else:
 	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv' # Changed from "_below12kHz.csv" for SM2BAT data
 	        df = read_csv(filePath)
@@ -91,15 +92,19 @@ def sumLabelTimes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
 					allSecondsList = getSecondsWithSound(label_subset)
 					totalTimeWithSound = getTotalTimeWithSound(allSecondsList)
 					row.append(str(totalTimeWithSound))
-	        results.append(row)
-
+			
+			# totalTimeForSoundGroup = getTimeForSoundGroup(df, soundGroupList) # Figure out what is wrong with this indenting
+			# print wavFile, totalTimeForSoundGroup
+			# row.append(totalTimeForSoundGroup)
+			# print row
+    		results.append(row)
 	return results
 
 def writeResultsToCSV(resultsFileDirectory, resultsFileName, labelList, results):
 	outputFile = open(resultsFileDirectory + "/" + resultsFileName + ".csv", "w")
 	writer = csv.writer(outputFile, delimiter=',')
 	labelList.insert(0, "Site")
-	columnHeader = labelList
+	columnHeader = labelList + soundGroupName
 	writer.writerow(columnHeader)
 	writer.writerows(results)
 	outputFile.close()
@@ -110,10 +115,14 @@ def calculateLabelTimes(csvfileDirectory, wavfileDirectory, resultsFileDirectory
 	results = sumLabelTimes(labelList, wavfileList, wavWOcsv, csvfileDirectory)
 	writeResultsToCSV(resultsFileDirectory, resultsFileName, labelList, results)
 
-csvFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Ali"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Ali"
+wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelTimes"
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelTimes"
 resultsName = "ali_LabelTimes"
 
+soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
+soundGroupName = ["Biotic"]
+
 calculateLabelTimes(csvFolder, wavFolder, resultsFolder, resultsName)
+
