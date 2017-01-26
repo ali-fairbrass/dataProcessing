@@ -9,15 +9,20 @@ def getLabelList(csvfileDirectory):
 
 	Labels = []
 	csvfileList = os.listdir(csvfileDirectory) 
+	
+	if "batdetector_results.csv" in csvfileList: 
+		csvfileList.remove("batdetector_results.csv")
 
 	for csvFile in csvfileList:
-	    filePath = csvfileDirectory + '/' + csvFile
-	    with open(filePath, 'r') as resultsFile:
-	        resultsFile.next() # skip the header
-	        reader = csv.reader(resultsFile)
-	        for row in reader:
-	            Label = row[1]
-	            Labels.append(Label)
+		print csvFile
+		filePath = csvfileDirectory + '/' + csvFile
+		with open(filePath, 'r') as resultsFile:
+			resultsFile.next() # skip the header
+			reader = csv.reader(resultsFile)
+			for row in reader:
+				Label = row[1]
+				print Label
+				Labels.append(Label)
 
 	resultsFile.close()
 
@@ -151,8 +156,8 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # # To generate overall label amounts data
 
-csvFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Ali"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
+csvFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\ClassifierAnalysis\\LabelsChecked"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\EdisonRecordings\\BrockwellParkBatWalk180816\\brockwell_bats\\recordings_amalgamated'
 
 # # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
 # # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
@@ -163,7 +168,7 @@ wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Cl
 # # csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
 # # wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelAmounts"
-resultsName = "ali_LabelAmounts"
+resultsFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\ClassifierAnalysis\\BatsPerRecordings"
+resultsName = "BrockwellRecordings"
 
 calculateLabelAmounts(csvFolder, wavFolder, resultsFolder, resultsName)
