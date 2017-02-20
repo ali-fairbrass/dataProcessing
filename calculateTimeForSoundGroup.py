@@ -46,11 +46,9 @@ def getTimeForSoundGroup(df, soundGroupList):
     allGroupSeconds = []
 
     for sound in soundGroupList:
-    	# print sound
         label_subset = df[df['Label'] == sound]
         if label_subset.shape[0] != 0:
             soundSecondsList = getSecondsWithSound(label_subset)
-            # print soundSecondsList
             allGroupSeconds.append(soundSecondsList)
         else:
             pass
@@ -60,7 +58,6 @@ def getTimeForSoundGroup(df, soundGroupList):
     myFormattedList = [ '%.2f' % elem for elem in merged ]
     lst = list(set(myFormattedList))
     totalTimeForSoundGroup = ("%.2f" % (len(lst)*0.01))
-    # print totalTimeForSoundGroup
 
     return totalTimeForSoundGroup
 
@@ -73,16 +70,13 @@ def createResults(wavfileList, wavWOcsv, csvfileDirectory):
 	    if wavFile[:-4] in wavWOcsv:
 	        row.append([wavFile] + [str(0.00)])
 	        row = list(itertools.chain(*row))
-	        # print row
 	        results.append(row)
-	        # print results
 	    else:
-	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv' # Changed from "_below12kHz.csv" for SM2BAT data
+	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv'
 	        df = read_csv(filePath)
 	        row.append(wavFile)
 	        totalTimeForSoundGroup = getTimeForSoundGroup(df, soundGroupList)
 	        row.append(totalTimeForSoundGroup)
-			# print row
     		results.append(row)
 	return results
 
@@ -94,14 +88,21 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, res
 	writer.writerows(results)
 	outputFile.close()
 
-soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
-soundGroupName = ["Biotic"]
+# soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
+# soundGroupName = ["Biotic"]
+
+# soundGroupList = ["Braking Vehicle (Road or Rail)", "Vehicle Alarm", "Siren", "Anthropogenic Unknown", "Metal", "Electrical Disturbance", "Human Voices", "Road Traffic", "Vehicle Horn (Road or Rail)",
+# "Mechanical", "Air Traffic"]
+# soundGroupName = ["Anthropogenic"]
+
+soundGroupList = ["Rain", "Wind"]
+soundGroupName = ["Abiotic"]
 
 csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Golden"
 wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
 
 resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelTimes"
-resultsName = "golden_BioticLabelTimes"
+resultsName = "golden_AbioticLabelTimes"
 
 csvfileList = getCSVFileList(csvFolder)
 wavWOcsv, wavfileList = getWavWOLabels(wavFolder, csvfileList)
