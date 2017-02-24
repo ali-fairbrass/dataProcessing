@@ -43,41 +43,50 @@ def getSecondsWithSound(label_subset):
 
 def getTimeForSoundGroup(df, soundGroupList):
 
-    allGroupSeconds = []
+	allGroupSeconds = []
+	if df.shape[0] > 1:
+		for sound in soundGroupList:
+			label_subset = df[df['Label'] == sound]
+			if label_subset.shape[0] != 0:
+				soundSecondsList = getSecondsWithSound(label_subset)
+				allGroupSeconds.append(soundSecondsList)
+			else:
+				pass
 
-    for sound in soundGroupList:
-        label_subset = df[df['Label'] == sound]
-        if label_subset.shape[0] != 0:
-            soundSecondsList = getSecondsWithSound(label_subset)
-            allGroupSeconds.append(soundSecondsList)
-        else:
-            pass
+		merged = list(itertools.chain(*allGroupSeconds))
+		merged = list(itertools.chain(*merged))
+		myFormattedList = [ '%.2f' % elem for elem in merged ]
+		lst = list(set(myFormattedList))
+		totalTimeForSoundGroup = ("%.2f" % (len(lst)*0.01))
 
-    merged = list(itertools.chain(*allGroupSeconds))
-    merged = list(itertools.chain(*merged))
-    myFormattedList = [ '%.2f' % elem for elem in merged ]
-    lst = list(set(myFormattedList))
-    totalTimeForSoundGroup = ("%.2f" % (len(lst)*0.01))
+	else:
+		totalTimeForSoundGroup = 0
 
-    return totalTimeForSoundGroup
+	if float(totalTimeForSoundGroup) > 60.00:
+		totalTimeForSoundGroup = 60.00
+	else:
+		pass
+
+	return totalTimeForSoundGroup
 
 def createResults(wavfileList, wavWOcsv, csvfileDirectory):
 
 	results = []
 
 	for wavFile in wavfileList:
-	    row = []
-	    if wavFile[:-4] in wavWOcsv:
-	        row.append([wavFile] + [str(0.00)])
-	        row = list(itertools.chain(*row))
-	        results.append(row)
-	    else:
-	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv'
-	        df = read_csv(filePath)
-	        row.append(wavFile)
-	        totalTimeForSoundGroup = getTimeForSoundGroup(df, soundGroupList)
-	        row.append(totalTimeForSoundGroup)
-    		results.append(row)
+		print "Processing: " + str(wavFile)
+		row = []
+		if wavFile[:-4] in wavWOcsv:
+			row.append([wavFile] + [str(0.00)])
+			row = list(itertools.chain(*row))
+			results.append(row)
+		else:
+			filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv'
+			df = read_csv(filePath)
+			row.append(wavFile)
+			totalTimeForSoundGroup = getTimeForSoundGroup(df, soundGroupList)
+			row.append(totalTimeForSoundGroup)
+			results.append(row)
 	return results
 
 def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, results):
@@ -88,21 +97,38 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, res
 	writer.writerows(results)
 	outputFile.close()
 
-# soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
+# soundGroupList = ["Squirrel", "amphibian", "animal", "bird", "cat", "fox", "grey squirrel", 
+# "insect", "invertebrate", "wing beats", "wingBeats", "wings beating"]
 # soundGroupName = ["Biotic"]
+# soundGroupListGolden = ["Animal", "Wing Beats", "Insect", "Bird"]
 
-# soundGroupList = ["Braking Vehicle (Road or Rail)", "Vehicle Alarm", "Siren", "Anthropogenic Unknown", "Metal", "Electrical Disturbance", "Human Voices", "Road Traffic", "Vehicle Horn (Road or Rail)",
+# soundGroupListGolden = ["Braking Vehicle (Road or Rail)", "Vehicle Alarm", "Siren", "Anthropogenic Unknown", "Metal", "Electrical Disturbance", "Human Voices", "Road Traffic", "Vehicle Horn (Road or Rail)",
 # "Mechanical", "Air Traffic"]
-# soundGroupName = ["Anthropogenic"]
+soundGroupList = ['Train doors (beeping)', 'airplane', 'anthropogenic unknown', 'applause', 'ball bouncing', 'barking dog',
+'bat hitting ball', 'beep', 'bells', 'breaking vehicle', 'building ventilation system', 'camera', 'car alarm', 'car horn', 'cat', 
+'church bell', 'church bells', 'clapping', 'coughing', 'deck lowering', 'dog bark', 'dog barking', 'door opening', 'electrical', 
+'electrical disturbance', 'footsteps', 'glass into bins', 'hammering', 'horn', 'human voice', 'laughing', 'lawnmower', 'machinery', 
+'mechanical', 'metal', 'metalic', 'metalic sound', 'mobile phone', 'mower', 'music', 'rail traffic', 'road traffic', 'rubbish bag', 'shower', 
+'siren', 'sweeping broom', 'television', 'train horn', 'train station announcement', 'vehicle breaking', 'vehicle horn', 'voices', 'whistle']
+soundGroupName = ["Anthropogenic"]
 
-soundGroupList = ["Rain", "Wind"]
-soundGroupName = ["Abiotic"]
+# soundGroupList = ["Rain", "Wind"]
+# soundGroupName = ["Abiotic"]
 
-csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Golden"
-wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
+#2013 data
+# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2013Random\\allLabelFiles"
+# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelTimes"
-resultsName = "golden_AbioticLabelTimes"
+# # 2014 data
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2014Random\\labelFiles"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2014Random\\wavFiles'
+
+# 2015 data
+# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2015Random\\allLabelFiles"
+# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2015Random\\allWavFiles'
+
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\labelTimes\\Anthropogenic"
+resultsName = "2014_anthropogenicLabelTimes"
 
 csvfileList = getCSVFileList(csvFolder)
 wavWOcsv, wavfileList = getWavWOLabels(wavFolder, csvfileList)
