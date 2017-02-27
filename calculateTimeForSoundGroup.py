@@ -45,7 +45,6 @@ def getTimeForSoundGroup(df, soundGroupList):
 
 	allGroupSeconds = []
 	if df.shape[0] > 3:
-		print df.shape[0]
 		for sound in soundGroupList:
 			label_subset = df[df['Label'] == sound]
 			if label_subset.shape[0] != 0:
@@ -61,7 +60,6 @@ def getTimeForSoundGroup(df, soundGroupList):
 		totalTimeForSoundGroup = ("%.2f" % (len(lst)*0.01))
 
 	else:
-		print df.shape[0]
 		totalTimeForSoundGroup = 0
 
 	if float(totalTimeForSoundGroup) > 60.00:
@@ -106,32 +104,34 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, res
 
 # soundGroupListGolden = ["Braking Vehicle (Road or Rail)", "Vehicle Alarm", "Siren", "Anthropogenic Unknown", "Metal", "Electrical Disturbance", "Human Voices", "Road Traffic", "Vehicle Horn (Road or Rail)",
 # "Mechanical", "Air Traffic"]
-soundGroupList = ['Braking', 'Bus emitting', 'Horn', 'Mix traffic', 'StarttheCar', 'Train doors (beeping)', 'airplane', 'alarm' 'anthropogenic unknown', 
-'applause', 'ball bouncing', 'barking dog',
-'bat hitting ball', 'beep', 'bells', 'breaking vehicle', 'building ventilation system', 'camera', 'car alarm', 'car horn', 'cat', 
-'church bell', 'church bells', 'clapping', 'coughing', 'deck lowering', 'dog bark', 'dog barking', 'door opening', 'electrical', 
-'electrical disturbance', 'footsteps', 'glass into bins', 'hammering', 'horn', 'human voice', 'laughing', 'lawnmower', 'machinery', 
-'mechanical', 'metal', 'metalic', 'metalic sound', 'mix traffic' 'mobile phone', 'mower', 'music', 'rail traffic', 'road traffic', 'rubbish bag', 'shower', 
-'siren', 'sweeping broom', 'television', 'train horn', 'train station announcement', 'vehicle breaking', 'vehicle horn', 'voices', 'whistle']
-soundGroupName = ["Anthropogenic"]
+# soundGroupList = ['Braking', 'Bus emitting', 'Horn', 'Mix traffic', 'StarttheCar', 'Train doors (beeping)', 'airplane', 'alarm' 'anthropogenic unknown', 
+# 'applause', 'ball bouncing', 'barking dog',
+# 'bat hitting ball', 'beep', 'bells', 'breaking vehicle', 'building ventilation system', 'camera', 'car alarm', 'car horn', 'cat', 
+# 'church bell', 'church bells', 'clapping', 'coughing', 'deck lowering', 'dog bark', 'dog barking', 'door opening', 'electrical', 
+# 'electrical disturbance', 'footsteps', 'glass into bins', 'hammering', 'horn', 'human voice', 'laughing', 'lawnmower', 'machinery', 
+# 'mechanical', 'metal', 'metalic', 'metalic sound', 'mix traffic' 'mobile phone', 'mower', 'music', 'rail traffic', 'road traffic', 'rubbish bag', 'shower', 
+# 'siren', 'sweeping broom', 'television', 'train horn', 'train station announcement', 'vehicle breaking', 'vehicle horn', 'voices', 'whistle']
+# soundGroupName = ["Anthropogenic"]
 
-# soundGroupList = ["Rain", "Wind"]
-# soundGroupName = ["Abiotic"]
+# soundGroupListGolden = ["Rain", "Wind"]
+soundGroupList = ['dripping water', 'rain', 'rainfall on vegetation', 'rock', 'russling leaves (animal)', 'russling vegetation (animal)',
+'vegetation', 'water dripping', 'water splashing', 'wind']
+soundGroupName = ["Abiotic"]
 
-#2013 data
-csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2013Random\\allLabelFiles"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
+# #2013 data
+# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\201Random\\allLabelFiles"
+# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
 
 # # # 2014 data
-# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2014Random\\labelFiles"
+# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2014Random\\allLabelFiles"
 # wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2014Random\\wavFiles'
 
 # 2015 data
-# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2015Random\\allLabelFiles"
-# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2015Random\\allWavFiles'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2015Random\\allLabelFiles"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2015Random\\allWavFiles'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\labelTimes\\Anthropogenic"
-resultsName = "2013_anthropogenicLabelTimes"
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\labelTimes\\Abiotic\\"
+resultsName = "2015_abioticLabelTimes"
 
 csvfileList = getCSVFileList(csvFolder)
 wavWOcsv, wavfileList = getWavWOLabels(wavFolder, csvfileList)
