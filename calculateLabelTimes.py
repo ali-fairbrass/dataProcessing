@@ -27,7 +27,7 @@ def getLabelList(csvfileDirectory):
 
 def getWavWOLabels(wavfileDirectory, csvfileList):
 
-	wavfileList = os.listdir(wavfileDirectory) 
+	allWavfileList = os.listdir(wavfileDirectory) 
 
 	csvfileListBase = []
 	for csvFile in csvfileList:
@@ -35,16 +35,19 @@ def getWavWOLabels(wavfileDirectory, csvfileList):
 	    csvfileListBase.append(csvBaseName)
 	    
 	wavFileListBase = []
-	for wavFile in wavfileList:
+	for wavFile in allWavfileList:
 	    wavBaseName = wavFile[:-4]
 	    wavFileListBase.append(wavBaseName)
 
 	wavWOcsv = []
+	wavfileList = []
 	for wav in wavFileListBase:
 	    if wav not in csvfileListBase:
 	        wavWOcsv.append(wav)
+	    else:
+	    	wavfileList.append(wav)
 
-	return wavWOcsv, wavfileList
+	return wavWOcsv, wavfileList, allWavfileList
 
 def getSecondsWithSound(label_subset):
     
@@ -67,20 +70,20 @@ def getTotalTimeWithSound(allSecondsList):
 
 
 
-def sumLabelTimes(labelList, wavfileList, wavWOcsv, csvfileDirectory):
+def sumLabelTimes(labelList, allWavfileList, wavWOcsv, csvfileDirectory):
 
 	results = []
-	zerosList = [0] * (labelList)
+	zerosList = [0] * len(labelList)
 
-	for wavFile in wavfileList:
+	for wavFile in allWavfileList:
 	    row = []
 	    if wavFile[:-4] in wavWOcsv:
 	        row.append([wavFile] + zerosList)
 	        row = list(itertools.chain(*row))
-	        print row
 	        results.append(row)
-	        print results
+	        print wavFile + ' is in wavWOcsv'
 	    else:
+	    	print wavFile + ' is not in wavWOcsv'
 	        filePath = csvfileDirectory + '/' + wavFile[:-4] + '-sceneRect.csv' # Changed from "_below12kHz.csv" for SM2BAT data
 	        df = read_csv(filePath)
 	        row.append(wavFile)
@@ -104,25 +107,27 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, labelList, results)
 	outputFile = open(resultsFileDirectory + "/" + resultsFileName + ".csv", "w")
 	writer = csv.writer(outputFile, delimiter=',')
 	labelList.insert(0, "Site")
-	columnHeader = labelList + soundGroupName
+	columnHeader = labelList
 	writer.writerow(columnHeader)
 	writer.writerows(results)
 	outputFile.close()
 
 def calculateLabelTimes(csvfileDirectory, wavfileDirectory, resultsFileDirectory, resultsFileName):
 	csvfileList, labelList = getLabelList(csvfileDirectory)
-	wavWOcsv, wavfileList = getWavWOLabels(wavfileDirectory, csvfileList)
-	results = sumLabelTimes(labelList, wavfileList, wavWOcsv, csvfileDirectory)
+	wavWOcsv, wavfileList, allWavfileList = getWavWOLabels(wavfileDirectory, csvfileList)
+	results = sumLabelTimes(labelList, allWavfileList, wavWOcsv, csvfileDirectory)
 	writeResultsToCSV(resultsFileDirectory, resultsFileName, labelList, results)
 
-csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40LabelFiles\\Ali"
-wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\40WavFiles'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\CityNetTrainData\\trainingSites\\raw_annots"
+wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\CityNetTrainData\\trainingSites\\wavs'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\labelTimes"
-resultsName = "ali_LabelTimes"
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\FairbrassFirmanetal_\\WorkingFile\\Figures\\TableSx"
+resultsName = "cityNetTrain_LabelTimes"
 
-soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
-soundGroupName = ["Biotic"]
+# soundGroupList = ["Animal", "Wing Beats", "Insect", "Bird"]
+# soundGroupName = ["Biotic"]
+
+
 
 calculateLabelTimes(csvFolder, wavFolder, resultsFolder, resultsName)
 
