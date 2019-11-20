@@ -1,5 +1,5 @@
 # dataProcessing
-Python scripts for management and analysis of acoustic and spatial datasets
+Python scripts for management and analysis of acoustic and spatial datasets.
 
 A collection of Python scripts developed for managing and analysing acoustic and spatial datasets. 
 
