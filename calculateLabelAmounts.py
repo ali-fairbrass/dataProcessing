@@ -156,8 +156,8 @@ def calculateLabelAmounts(csvfileDirectory, wavfileDirectory, resultsFileDirecto
 
 # # To generate overall label amounts data
 
-csvFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\ClassifierAnalysis\\LabelsChecked"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\EdisonRecordings\\BrockwellParkBatWalk180816\\brockwell_bats\\recordings_amalgamated'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4 Urban Soundscape\\Data\\random_SE232NZ\\label"
+wavFolder = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4 Urban Soundscape\\Data\\random_SE232NZ\\2secCrop'
 
 # # csv24kHz = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/csvFiles/Transport"
 # # wav24kHz = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/24000HzSR/wavFiles'
@@ -168,7 +168,7 @@ wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact
 # # csvSM2BAT = "C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/Labels_SM2BAT+"
 # # wavSM2BAT = 'C:/Users/ucfaalf/Dropbox/EngD/Projects/Chapter 2 Acoustic analysis/Sound_Files/25_Files/SM2BAT+'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Documents\\Dropbox\\EngD\\Funding\\EPSRC Impact Accelerator Grant\\WorkPackages\\WP2\\ClassifierAnalysis\\BatsPerRecordings"
-resultsName = "BrockwellRecordings"
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter4 Urban Soundscape\\Data\\random_SE232NZ"
+resultsName = "SE222NZ_labelAmounts"
 
 calculateLabelAmounts(csvFolder, wavFolder, resultsFolder, resultsName)

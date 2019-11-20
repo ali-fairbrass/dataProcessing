@@ -4,8 +4,8 @@ from scipy.io import wavfile
 import os
 import glob
 
-data_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+/'
-op_dir = 'X:/Fieldwork_Data/2015/Random_25/SM2BAT+_cropped/'
+data_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\FairbrassFirmanetal_\\data\\random_SE232NZ\\original\\'
+op_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\FairbrassFirmanetal_\\data\\random_SE232NZ\\2secCrop\\'
 
 def cropAudioByTime(inputdirectory, outputdirectory):
 
@@ -34,5 +34,4 @@ def cropAudioByTime(inputdirectory, outputdirectory):
         op_file_name = outputdirectory + "\\" + file_name[:-4] + '.wav'
         wavfile.write(op_file_name, sampling_rate, x_crop)
 
-cropAudioByTime('C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\testSM2BAT+',
-    'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\testSM2BAT+_cropped')
+cropAudioByTime(data_dir, op_dir)

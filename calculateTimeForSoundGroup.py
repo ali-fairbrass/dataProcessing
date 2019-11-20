@@ -97,9 +97,9 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, res
 	writer.writerows(results)
 	outputFile.close()
 
-# soundGroupList = ["Squirrel", "amphibian", "animal", "bird", "cat", "fox", "grey squirrel", 
-# "insect", "invertebrate", "wing beats", "wingBeats", "wings beating"]
-# soundGroupName = ["Biotic"]
+soundGroupList = ["Squirrel", "amphibian", "animal", "bird", "cat", "fox", "grey squirrel", 
+"insect", "invertebrate", "wing beats", "wingBeats", "wings beating"]
+soundGroupName = ["Biotic"]
 # soundGroupListGolden = ["Animal", "Wing Beats", "Insect", "Bird"]
 
 # soundGroupListGolden = ["Braking Vehicle (Road or Rail)", "Vehicle Alarm", "Siren", "Anthropogenic Unknown", "Metal", "Electrical Disturbance", "Human Voices", "Road Traffic", "Vehicle Horn (Road or Rail)",
@@ -114,24 +114,24 @@ def writeResultsToCSV(resultsFileDirectory, resultsFileName, soundGroupName, res
 # soundGroupName = ["Anthropogenic"]
 
 # soundGroupListGolden = ["Rain", "Wind"]
-soundGroupList = ['dripping water', 'rain', 'rainfall on vegetation', 'rock', 'russling leaves (animal)', 'russling vegetation (animal)',
-'vegetation', 'water dripping', 'water splashing', 'wind']
-soundGroupName = ["Abiotic"]
+# soundGroupList = ['dripping water', 'rain', 'rainfall on vegetation', 'rock', 'russling leaves (animal)', 'russling vegetation (animal)',
+# 'vegetation', 'water dripping', 'water splashing', 'wind']
+# soundGroupName = ["Abiotic"]
 
 # #2013 data
-# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\201Random\\allLabelFiles"
-# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
+csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2013Random\\allLabelFiles"
+wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files'
 
 # # # 2014 data
 # csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2014Random\\allLabelFiles"
 # wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2014Random\\wavFiles'
 
 # 2015 data
-csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2015Random\\allLabelFiles"
-wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2015Random\\allWavFiles'
+# csvFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2015Random\\allLabelFiles"
+# wavFolder = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2015Random\\allWavFiles'
 
-resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\labelTimes\\Abiotic\\"
-resultsName = "2015_abioticLabelTimes"
+resultsFolder = "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\fullDataSet\\labelTimes\\Biotic\\"
+resultsName = "2013_bioticLabelTimes"
 
 csvfileList = getCSVFileList(csvFolder)
 wavWOcsv, wavfileList = getWavWOLabels(wavFolder, csvfileList)

@@ -5,8 +5,8 @@ import random
 # CSV_DIR_NO_TRANSPORT = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\LabelsCSV\\'
 # CSV_DIR_TRANSPORT24kHz = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\LabelsCSVTransport\\24000HzSR'
 # CSV_DIR_TRANSPORT41kHz = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\LabelsCSVTransport\\41000HzSR'
-CSV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_VerityLabels\\'
-WAV_DIR = 'Y:\\Fieldwork_Data\\2015\\Random_25\\SM2+_downSample\\'
+CSV_DIR = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Data\\2013Random\\allLabelFiles\\'
+WAV_DIR = 'C:\\Users\\ucfaalf\\Documents\\Projects\\AcousticAnalysis\\2013Random\\Amalgamated_Files_24kHz\\'
 
 # csvFilesNoTransport = os.listdir(CSV_DIR_NO_TRANSPORT)
 # csvFilesTransport24kHz = os.listdir(CSV_DIR_TRANSPORT24kHz)
@@ -39,10 +39,10 @@ for wav in wavFileList:
     if wav not in csvFileList:
         wavWOcsv.append(wav)
 
-verityLabels = []
-for wavFile in wavWOcsv:
-    if wavFile[:3] in ('BR4', 'BR2', 'IG6', 'E29', 'TW7', 'BR6', 'DA5', 'RM4', 'CM1'):
-        verityLabels.append(wavFile)
+# verityLabels = []
+# for wavFile in wavWOcsv:
+#     if wavFile[:3] in ('BR4', 'BR2', 'IG6', 'E29', 'TW7', 'BR6', 'DA5', 'RM4', 'CM1'):
+#         verityLabels.append(wavFile)
 
 # print verityLabels
 
@@ -54,16 +54,16 @@ for wavFile in wavWOcsv:
 # 	wav2BaseName = wav2[:-4]
 # 	wav2FileList.append(wav2BaseName)
 
-fileListBlankFiles = [x for x in wavFileList if x in verityLabels]
+# fileListBlankFiles = [x for x in wavFileList if x in verityLabels]
 
-print len(fileListBlankFiles)
+# print len(fileListBlankFiles)
 
-randomNumbers = random.sample(xrange(len(fileListBlankFiles)), 2)
-fileSelection = [fileListBlankFiles[i] for i in randomNumbers]
+# randomNumbers = random.sample(xrange(len(fileListBlankFiles)), 2)
+# fileSelection = [fileListBlankFiles[i] for i in randomNumbers]
 
-print fileSelection
+# print fileSelection
 
-for i in fileSelection:
-    shutil.copy(WAV_DIR + i + '.wav', "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 3\\goldenTestSet\\21VerityFiles")
+# for i in fileSelection:
+#     shutil.copy(WAV_DIR + i + '.wav', "C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter 3\\goldenTestSet\\21VerityFiles")
 
-
+print(wavWOcsv)

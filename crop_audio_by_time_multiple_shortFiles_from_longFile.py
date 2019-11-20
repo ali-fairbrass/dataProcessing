@@ -5,8 +5,8 @@ import os
 import glob
 from datetime import datetime
 
-data_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\timeStepFiles\\oneMinFiles\\'
-op_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evaluation\\goldenTestSet\\timeStepFiles\\timeStep\\'
+data_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Funding\\NERC Innovation\\WorkPackages\\WP2\\classifierTests\\'
+op_dir = data_dir + 'shortfiles\\'
 
 # folders = os.listdir(data_dir)
 # folders.remove('BR20EG')
@@ -16,7 +16,7 @@ op_dir = 'C:\\Users\\ucfaalf\\Dropbox\\EngD\\Projects\\Chapter3 Classifier Evalu
 
 # startTime = datetime.now()
 
-crop_duration = 0.1857  # seconds
+crop_duration = 10.0  # seconds
 
 # for folder in folders:
 #     data_folder = data_dir + folder #+ "\\SM2+\\"
@@ -49,7 +49,8 @@ crop_duration = 0.1857  # seconds
 # print 'Time taken:' + str(datetime.now() - startTime)
 
 ## For a single folder
-audio_files = glob.glob(data_dir + '*.wav')
+# audio_files = glob.glob(data_dir + '*.wav') # for multiple files
+audio_files = ['F:\\pilotData\\1\\5AFC9F54.WAV'] # for a single file
 
 for ii, file_name_full in enumerate(audio_files):
 
@@ -61,12 +62,12 @@ for ii, file_name_full in enumerate(audio_files):
         
         start_time = i*crop_duration # seconds    
 
-        print '\n', os.path.basename(file_name), start_time, file_duration
+        print '\n', os.path.basename(file_name), start_time
 
         # crop
         x_crop = x_full[sampling_rate*start_time:sampling_rate*(start_time+crop_duration)]
 
         # save
-        op_file_name = op_dir + file_name[:-4] + '_' + str(start_time) + '.wav'
+        op_file_name = op_dir + file_name[:-4] + '_' + str(start_time)[:-2] + '.wav'
         wavfile.write(op_file_name, sampling_rate, x_crop)
             
